@@ -1,84 +1,101 @@
-/* ---------- 基础 ---------- */
+/* 基础 */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
   margin: 0;
-  font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  /* 背景：108996B8624F0C7CE65094012F01D8DC.png*/
+  font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* 你的聊天背景图（确保这个文件名存在于 images 文件夹） */
   background: url("images/108996B8624F0C7CE.jpeg") center/cover no-repeat fixed;
 }
 
-/* 外层容器：不要白底，保证气泡能看见“磨砂” */
+/* 外层容器：不要白底，给气泡留出“磨砂”空间 */
 .chat {
-  max-width: 680px;
-  margin: 48px auto;
-  padding: 8px 12px;
+  width: min(680px, 94vw);
+  margin: 32px auto;
+  padding: 0 8px 80px;
 }
 
-/* 一条消息 */
+/* 单条消息 */
 .msg {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 12px;
-  margin: 16px 8px;
+  margin: 18px 8px;
 }
-.msg.right { justify-content: flex-end; }
+.msg.right { flex-direction: row-reverse; }
 
-/* 头像：方形+圆角 */
+/* 头像：方形 + 12px 圆角 */
 .avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;          /* 方圆角而不是圆形 */
+  width: 48px; height: 48px;
+  border-radius: 12px;
   object-fit: cover;
-  flex: 0 0 48px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.12);
 }
 
-/* 气泡基样式（磨砂玻璃） */
+/* 气泡通用 */
 .bubble {
   position: relative;
-  max-width: 72%;
-  padding: 12px 16px;
-  line-height: 1.6;
+  max-width: 72vw;
+  padding: 14px 16px;
+  line-height: 1.65;
   border-radius: 18px;
-  border: 1px solid rgba(255,255,255,.55);
-  box-shadow: 0 6px 24px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.25);
-  backdrop-filter: blur(12px) saturate(120%);
-  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  word-break: break-word;
+  box-shadow: 0 10px 22px rgba(0,0,0,.10);
 }
 
-/* 左侧：浅灰磨砂 */
-.msg.left .bubble {
+/* 左侧：玻璃磨砂（偏白、半透明） */
+.left .bubble {
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(0,0,0,.06);
   color: #333;
-  background: linear-gradient(to bottom right, rgba(255,255,255,.55), rgba(255,255,255,.35));
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px) saturate(140%);
 }
-
-/* 右侧：淡蓝磨砂 */
-.msg.right .bubble {
-  color: #0b3a53;
-  border-color: rgba(152,206,255,.6);
-  background: linear-gradient(to bottom right, rgba(152,206,255,.55), rgba(152,206,255,.35));
-}
-
-/* 小尾巴 */
-.msg.left .bubble::after {
+/* 左侧小尾巴 */
+.left .bubble::after {
   content: "";
   position: absolute;
-  left: -6px; top: 18px;
+  left: -6px; bottom: 12px;
   width: 12px; height: 12px;
-  background: inherit;                /* 继承背景，尾巴也磨砂 */
-  border-left: 1px solid inherit;
-  border-bottom: 1px solid inherit;
+  background: rgba(255,255,255,.55);
+  border-left: 1px solid rgba(0,0,0,.06);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  border-bottom-left-radius: 10px;
   transform: rotate(45deg);
-  border-radius: 0 0 0 6px;
 }
-.msg.right .bubble::after {
+
+/* 右侧：淡蓝玻璃（有轻微高光） */
+.right .bubble {
+  background:
+    radial-gradient(120% 140% at 70% -10%,
+      rgba(255,255,255,.45), rgba(135,192,255,.55))
+    , rgba(130,190,255,.55);
+  border: 1px solid rgba(0,126,255,.12);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0,0,0,.10);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  backdrop-filter: blur(12px) saturate(160%);
+}
+/* 右侧小尾巴 */
+.right .bubble::after {
   content: "";
   position: absolute;
-  right: -6px; top: 18px;
+  right: -6px; bottom: 12px;
   width: 12px; height: 12px;
-  background: inherit;
-  border-right: 1px solid inherit;
-  border-bottom: 1px solid inherit;
+  background:
+    radial-gradient(120% 140% at 70% -10%,
+      rgba(255,255,255,.45), rgba(135,192,255,.55))
+    , rgba(130,190,255,.55);
+  border-right: 1px solid rgba(0,126,255,.12);
+  border-bottom: 1px solid rgba(0,126,255,.12);
+  border-bottom-right-radius: 10px;
   transform: rotate(-45deg);
-  border-radius: 0 0 6px 0;
+}
+
+/* 手机排版微调 */
+@media (max-width: 420px) {
+  .avatar { width: 44px; height: 44px; }
+  .bubble { max-width: 78vw; padding: 12px 14px; }
+  .chat { margin-top: 24px; }
 }
