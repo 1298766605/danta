@@ -1,128 +1,70 @@
+/* ===== Chat Style ===== */
+
 body {
-  margin: 0;
-  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-  background: url("bg.jpg") no-repeat center center fixed;
+  background-image: url("images/108996B8624F0C7CE.jpeg");
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: "PingFang SC", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.chat-header {
-  background-color: rgba(237, 237, 237, 0.85);
-  padding: 10px 15px;
+.chat {
+  max-width: 700px;
+  margin: 60px auto;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+
+.msg {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #ccc;
-  font-size: 14px;
-  color: #555;
+  align-items: flex-start;
+  margin-bottom: 20px;
 }
 
-.chat-container {
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 110px);
-  overflow-y: auto;
+/* avatar */
+.msg img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px; /* square avatar */
+  margin-top: 5px;
 }
 
-.message {
-  display: flex;
-  align-items: flex-end;
-  margin-bottom: 10px;
+/* text bubble */
+.msg p {
+  margin: 0 12px;
+  padding: 12px 16px;
+  border-radius: 18px;
+  max-width: 70%;
+  line-height: 1.6;
+  font-size: 16px;
+  word-wrap: break-word;
+  transition: all 0.3s ease;
 }
 
-.message.left {
-  justify-content: flex-start;
+.left p {
+  background: #f1f1f1;
+  color: #333;
+  border-top-left-radius: 0;
 }
 
-.message.right {
-  justify-content: flex-end;
+.right {
+  flex-direction: row-reverse;
 }
 
-.avatar {
-  width: 42px;
-  height: 42px;
-  border-radius: 6px;
-  margin: 0 8px;
-  box-shadow: 0 0 3px rgba(0,0,0,0.2);
-}
-
-.bubble {
-  max-width: 65%;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 15px;
-  line-height: 1.5;
-  position: relative;
-  animation: popIn 0.25s ease-out;
-  word-break: break-word;
-}
-
-.left .bubble {
-  background: #ffffff;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.right .bubble {
-  background: #95ec69;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-/* 小三角气泡 */
-.left .bubble::before {
-  content: "";
-  position: absolute;
-  left: -6px;
-  top: 10px;
-  width: 0;
-  height: 0;
-  border-top: 6px solid transparent;
-  border-right: 6px solid #fff;
-  border-bottom: 6px solid transparent;
-}
-
-.right .bubble::before {
-  content: "";
-  position: absolute;
-  right: -6px;
-  top: 10px;
-  width: 0;
-  height: 0;
-  border-top: 6px solid transparent;
-  border-left: 6px solid #95ec69;
-  border-bottom: 6px solid transparent;
-}
-
-.chat-input {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #f5f5f5;
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
-}
-
-.chat-input input {
-  flex: 1;
-  padding: 8px 10px;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  background: #fff;
-}
-
-.chat-input button {
-  margin-left: 10px;
-  padding: 6px 12px;
-  background: #07c160;
+.right p {
+  background: #8cc8ff;
   color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  border-top-right-radius: 0;
 }
 
-@keyframes popIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
+/* hover animation */
+.msg p:hover {
+  transform: scale(1.03);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
 }
