@@ -1,83 +1,84 @@
-/* ===== Chat Style by 顺子 ===== */
-
+/* ---------- 基础 ---------- */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
 body {
-  background-image: url("images/108996B8624F0C7CE.jpeg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  font-family: "PingFang SC", sans-serif;
   margin: 0;
-  padding: 0;
+  font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* 背景：换成你的图片文件名 */
+  background: url("images/108996B8624F0C7CE.jpeg") center/cover no-repeat fixed;
 }
 
+/* 外层容器：不要白底，保证气泡能看见“磨砂” */
 .chat {
-  max-width: 700px;
-  margin: 60px auto;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 20px;
-  padding: 25px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-  backdrop-filter: blur(12px);
-  animation: fadeIn 1s ease;
+  max-width: 680px;
+  margin: 48px auto;
+  padding: 8px 12px;
 }
 
+/* 一条消息 */
 .msg {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 22px;
-  animation: bubbleUp 0.5s ease;
+  gap: 12px;
+  margin: 16px 8px;
 }
+.msg.right { justify-content: flex-end; }
 
-/* avatar style */
-.msg img {
-  width: 60px;
-  height: 60px;
+/* 头像：方形+圆角 */
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;          /* 方圆角而不是圆形 */
   object-fit: cover;
-  border-radius: 10px; /* 方角 */
-  margin-top: 5px;
+  flex: 0 0 48px;
 }
 
-/* text bubble */
-.msg p {
-  margin: 0 12px;
-  padding: 12px 18px;
-  border-radius: 18px;
-  max-width: 70%;
+/* 气泡基样式（磨砂玻璃） */
+.bubble {
+  position: relative;
+  max-width: 72%;
+  padding: 12px 16px;
   line-height: 1.6;
-  font-size: 16px;
-  word-wrap: break-word;
-  transition: all 0.3s ease;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.55);
+  box-shadow: 0 6px 24px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.25);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
 }
 
-.left p {
-  background: #f1f1f1;
+/* 左侧：浅灰磨砂 */
+.msg.left .bubble {
   color: #333;
-  border-top-left-radius: 0;
+  background: linear-gradient(to bottom right, rgba(255,255,255,.55), rgba(255,255,255,.35));
 }
 
-.right {
-  flex-direction: row-reverse;
+/* 右侧：淡蓝磨砂 */
+.msg.right .bubble {
+  color: #0b3a53;
+  border-color: rgba(152,206,255,.6);
+  background: linear-gradient(to bottom right, rgba(152,206,255,.55), rgba(152,206,255,.35));
 }
 
-.right p {
-  background: #8cc8ff;
-  color: #fff;
-  border-top-right-radius: 0;
+/* 小尾巴 */
+.msg.left .bubble::after {
+  content: "";
+  position: absolute;
+  left: -6px; top: 18px;
+  width: 12px; height: 12px;
+  background: inherit;                /* 继承背景，尾巴也磨砂 */
+  border-left: 1px solid inherit;
+  border-bottom: 1px solid inherit;
+  transform: rotate(45deg);
+  border-radius: 0 0 0 6px;
 }
-
-/* hover glow */
-.msg p:hover {
-  transform: scale(1.03);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-}
-
-/* animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes bubbleUp {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: translateY(0); }
+.msg.right .bubble::after {
+  content: "";
+  position: absolute;
+  right: -6px; top: 18px;
+  width: 12px; height: 12px;
+  background: inherit;
+  border-right: 1px solid inherit;
+  border-bottom: 1px solid inherit;
+  transform: rotate(-45deg);
+  border-radius: 0 0 6px 0;
 }
