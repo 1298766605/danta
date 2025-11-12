@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>仿微信聊天界面</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: url("snow-bg.jpeg") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* 顶部导航栏 */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .arrow {
+      border: solid #333;
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      padding: 4px;
+      transform: rotate(135deg);
+      cursor: pointer;
+    }
+
+    .chat-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .top-right {
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* 聊天区 */
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow-y: auto;
+      padding: 10px 12px;
+    }
+
+    .message {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 12px;
+    }
+
+    .message.left {
+      flex-direction: row;
+    }
+
+    .message.right {
+      flex-direction: row-reverse;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      margin: 0 8px;
+      object-fit: cover;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
+
+    .bubble {
+      max-width: 70%;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 15px;
+      line-height: 1.5;
+      word-wrap: break-word;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .left .bubble {
+      background: rgba(255, 255, 255, 0.6);
+      color: #222;
+    }
+
+    .right .bubble {
+      background: rgba(255, 182, 193, 0.6);
+      color: #222;
+    }
+
+    /* 输入框 */
+    .input-area {
+      display: flex;
+      align-items: center;
+      border-top: 1px solid rgba(0,0,0,0.05);
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(8px);
+      padding: 8px 10px;
+    }
+
+    .input-area input {
+      flex: 1;
+      border: none;
+      border-radius: 18px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.7);
+      font-size: 14px;
+      outline: none;
+    }
+
+    .input-area button {
+      background: #ffb6c1;
+      border: none;
+      color: white;
+      border-radius: 16px;
+      padding: 7px 14px;
+      margin-left: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部仿微信导航栏 -->
+  <div class="top-bar">
+    <div class="top-left">
+      <div class="arrow"></div>
+      <!-- 聊天对象名可手动编辑 -->
+      <div class="chat-title" contenteditable="true">符顺</div>
+    </div>
+    <div class="top-right">17:26 ▪︎ 5G 81%</div>
+  </div>
+
+  <!-- 聊天内容 -->
+  <div class="chat-container">
+    <div class="message left">
+      <img src="avatar-left.jpeg" class="avatar" alt="符顺">
+      <div class="bubble">啧……你又整这些花里胡哨的。</div>
+    </div>
+    <div class="message right">
+      <img src="avatar-right.jpeg" class="avatar" alt="蛋妹">
+      <div class="bubble">那你不也看得挺高兴的？</div>
+    </div>
+    <div class="message left">
+      <img src="avatar-left.jpeg" class="avatar" alt="符顺">
+      <div class="bubble">少贫嘴，今儿这气泡比你嘴还软。</div>
+    </div>
+  </div>
+
+  <!-- 输入区 -->
+  <div class="input-area">
+    <input type="text" placeholder="输入消息…" />
+    <button>发送</button>
+  </div>
+
+</body>
+</html>
